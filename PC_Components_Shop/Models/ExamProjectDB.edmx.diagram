@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7857d4f1bcef4c6ebbc5a03407598a88" Name="Diagram1">
+        <EntityTypeShape EntityType="ExamProjectDBModel.Address" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.DeliveryService" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.Account" Width="1.5" PointX="6" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.AccountType" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.OrderItem" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.Order" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.OrderState" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.PaymentMethod" Width="1.5" PointX="6" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.Product" Width="1.5" PointX="8.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.ProductCategory" Width="1.5" PointX="6" PointY="12.875" IsExpanded="true" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Account__Fk_Bill__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Account__Fk_Ship__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__DeliveryS__Fk_Ad__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Deliv__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Account__Fk_Acco__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Accou__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__OrderItem__Order__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__OrderItem__Produ__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Order__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Payme__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Product__Fk_Prod__31EC6D26" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

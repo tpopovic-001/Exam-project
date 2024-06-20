@@ -1,33 +1,71 @@
-﻿@{
+﻿@using PC_Components_Shop.Models
+@using PagedList.Mvc
+@using PagedList
+
+@model IPagedList<Product>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
-
     <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+        <div class="col-3">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <input type="text" name="filterCriteria" placeholder="Search by product name..." />
+                <input type="submit" name="submit" value="Search" />
+            }
+        </div>
+        <div class="col-3">
+            <form method="get">
+                <p>
+                    <select name="sortByPrice" onchange="this.form.submit()">
+                        <option value="default" @( ViewBag.CurrentSort == "default" ? "selected" : "")>Sort by price</option>
+                        <option value="standardPrice_asc" @( ViewBag.CurrentSort == "standardPrice_asc" ? "selected" : "")>Price (Min - Max)</option>
+                        <option value="standardPrice_desc" @(ViewBag.CurrentSort == "standardPrice_desc" ? "selected" : "")>Price (Max - Min)</option>
+                    </select>
+                    <input type="submit" value="Sort" />
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        @if (Model.Count == 0)
+        {
+            <div class="col-12">
+                <h5 class="text-danger">No products found! Try searching something else!</h5>
+            </div>
+
+        }
+        @foreach (var prod in Model)
+        {
+            <div class="col-lg-3">
+                <div class="card" style="margin: 2rem 1rem 2rem 1rem">
+                    <img class="card-img-top" src="" alt="" width="200" height="200" />
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelProduct => prod.ProductName)</h5>
+                        <p class="card-text">
+                            @Html.DisplayFor(modelProduct => prod.ProductDescription)
+                        </p>
+                        <p>
+                            <span class="text-black">Price: @Html.DisplayFor(modelProduct => prod.StandardPrice)</span>
+                        </p>
+                        <p>
+                            <a class="btn btn-success" href="">Details</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, filterCriteria = Request.QueryString["filterCriteria"], sortByPrice = ViewBag.PriceSortParm }), new PagedListRenderOptions
+       {
+           UlElementClasses = new[] { "pagination pagination-md" },
+           LiElementClasses = new[] { "page-item" }
+       })
+        </div>
     </div>
 </main>
