@@ -23,19 +23,32 @@ namespace PC_Components_Shop.Controllers
             switch (sortByPrice)
             {
                 case "standardPrice_asc":
-                    PagedProducts = Products.OrderBy(o => o.StandardPrice).ToPagedList(page ?? 1, 10);
+                    PagedProducts = Products.OrderBy(o => o.StandardPrice).ToPagedList(page ?? 1,10);
                     break;
 
                 case "standardPrice_desc":
-                    PagedProducts = Products.OrderByDescending(o => o.StandardPrice).ToPagedList(page ?? 1, 10);
+                    PagedProducts = Products.OrderByDescending(o => o.StandardPrice).ToPagedList(page ?? 1, 10); ;
                     break;
 
                 case "default":
                     sortByPrice = null;
                     break;
             }
+            
             ViewBag.CurrentSort = sortByPrice;
-            ViewBag.PriceSortParm = sortByPrice == "standardPrice_asc" ? "standardPrice_asc" : "standardPrice_desc";
+
+            switch (sortByPrice)
+            {
+                case "default":
+                    ViewBag.PriceSortParm = sortByPrice;
+                    break;
+                case "standardPrice_asc":
+                    ViewBag.PriceSortParm = sortByPrice;
+                    break;
+                case "standardPrice_desc":
+                    ViewBag.PriceSortParm = sortByPrice;
+                    break;
+            }
          
             return View(PagedProducts);  
         }
