@@ -26,6 +26,10 @@
         <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Order__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="ExamProjectDBModel.FK__Orders__Fk_Payme__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="ExamProjectDBModel.FK__Product__Fk_Prod__31EC6D26" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.City" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="ExamProjectDBModel.Country" Width="1.5" PointX="0.75" PointY="8.125" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__Address__Fk_City__29572725" />
+        <AssociationConnector Association="ExamProjectDBModel.FK__City__Fk_Country__267ABA7A" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

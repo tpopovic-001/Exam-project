@@ -11,7 +11,8 @@ namespace PC_Components_Shop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Address
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +24,19 @@ namespace PC_Components_Shop.Models
         }
     
         public int AddressID { get; set; }
+        [Required(ErrorMessage ="Address street name field is required and cannot be empty!")]
+        [StringLength(80,ErrorMessage ="Street name cannot be longer than 80 characters!")]
+        [RegularExpression(@"^[A-Z][a-z]*(\s[A-Za-z][a-z]*)*$",ErrorMessage ="Invalid street name format!")]
         public string StreetName { get; set; }
+        [Required(ErrorMessage = "Address street number field is required and cannot be empty!")]
+        [StringLength(5, ErrorMessage = "Street number cannot be longer than 5 characters!")]
+        [RegularExpression(@"^[0-9]*[A-Za-z]*$", ErrorMessage = "Invalid street number format!")]
         public string StreetNumber { get; set; }
+        [Required(ErrorMessage = "Apartment number field is required and cannot be empty!")]
+        [StringLength(5, ErrorMessage = "Apartment number cannot be longer than 5 characters!")]
+        [RegularExpression(@"^[0-9]*[A-Za-z]*$", ErrorMessage = "Invalid apartment number format!")]
         public string ApartmentNumber { get; set; }
+        public Nullable<int> Fk_City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
@@ -33,5 +44,6 @@ namespace PC_Components_Shop.Models
         public virtual ICollection<Account> Accounts1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryService> DeliveryServices { get; set; }
+        public virtual City City { get; set; }
     }
 }

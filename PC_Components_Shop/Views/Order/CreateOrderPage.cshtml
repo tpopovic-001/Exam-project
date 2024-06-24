@@ -1,0 +1,53 @@
+﻿@using PC_Components_Shop.Models
+
+@model  OrderViewData
+
+@{
+    ViewBag.Title = "Create New Order";
+}
+
+<main>
+    <div class="row justify-content-lg-start">
+        <div class="col-6 justify-content-center">
+            <form method="post" asp-action="">
+                <div class="form-control p-5">
+                   
+                    <p>
+                        <label name="DeliveryServiceName">Select Delivery Service</label>
+                        <select name="deliveryService" class="mb-3">
+                            @foreach (var ds in Model.deliveryServiceList)
+                            {
+                                <option value="@ds.DeliveryServiceID">
+                                    @ds.DeliveryServiceName - @ds.DeliveryFee€
+                                </option>
+                            }
+                        </select>
+                    </p>
+                    <p>
+                        <label name="PaymentMethodName">Select Payment Method</label>
+                        <select name="paymentMethod" class="mb-3">
+                            @foreach (var pm in Model.paymentMethodList)
+                            {
+                                <option value="@pm.PaymentMethodID">
+                                    @pm.PaymentMethodName
+                                </option>
+                            }
+                        </select>
+                    </p>
+                    <p>
+                        <label name="ProductNameNPrice">Select Product</label>
+                        <select name="product" class="mb-3">
+                            @foreach (var p in Model.productList)
+                            {
+                                <option value="@p.ProductID">
+                                    @p.ProductName - @p.StandardPrice€
+                                </option>
+                            }
+                        </select>
+                    </p>                          
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+

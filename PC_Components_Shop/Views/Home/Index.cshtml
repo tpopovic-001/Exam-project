@@ -9,7 +9,7 @@
 }
 
 <main>
-    <div class="row">
+    <div class="row justify-content-center mt-5">
         <div class="col-3">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
@@ -25,7 +25,6 @@
                         <option value="standardPrice_asc" @( ViewBag.CurrentSort == "standardPrice_asc" ? "selected" : "")>Price (Min - Max)</option>
                         <option value="standardPrice_desc" @(ViewBag.CurrentSort == "standardPrice_desc" ? "selected" : "")>Price (Max - Min)</option>
                     </select>
-                    <input type="submit" value="Sort" />
                 </p>
             </form>
         </div>
@@ -60,7 +59,7 @@
         }
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-5 mb-5">
             @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, filterCriteria = Request.QueryString["filterCriteria"], sortByPrice = ViewBag.PriceSortParm }), new PagedListRenderOptions
        {
            UlElementClasses = new[] { "pagination pagination-md" },

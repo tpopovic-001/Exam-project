@@ -1,0 +1,90 @@
+﻿@using PC_Components_Shop.Models;
+
+@model RegisterViewData
+@{
+    Layout = null;
+    ViewBag.Title = "Register account";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-black mt-3 mb-3">
+                    Register new Account
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                @using (Html.BeginForm("SendAccountData","Register",FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">First name</label>
+                        @Html.TextBoxFor(model => model.Account.FirstName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Last name</label>
+                        @Html.TextBoxFor(model => model.Account.LastName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Email Address</label>
+                        @Html.TextBoxFor(model => model.Account.EmailAddress, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Account.EmailAddress, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Date of birth</label>
+                        @Html.TextBoxFor(model => model.Account.DOB, new { @class = "form-control", type = "datetime-local"})
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Username</label>
+                        @Html.TextBoxFor(model => model.Account.UserName, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Account.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Password</label>
+                        @Html.TextBoxFor(model => model.Account.Password, new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.Account.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Billing Address</label>
+                        @Html.TextBoxFor(model => model.Account.Address.StreetName, new { @class = "form-control", placeholder = "Street name" })
+                        @Html.ValidationMessageFor(model => model.Account.Address.StreetName, "", new { @class = "text-danger m-2" })
+                        @Html.TextBoxFor(model => model.Account.Address.StreetNumber, new { @class = "form-control", placeholder = "Street number" })
+                        @Html.ValidationMessageFor(model => model.Account.Address.StreetNumber, "", new { @class = "text-danger m-2" })
+                        @Html.TextBoxFor(model => model.Account.Address.ApartmentNumber, new { @class = "form-control", placeholder = "Apartment number" })
+                        @Html.ValidationMessageFor(model => model.Account.Address.ApartmentNumber, "", new { @class = "text-danger m-2" })
+                        @*  @Html.DropDownList("baCity", new SelectList(Model.cityList, "CityID", "CityName"), "Select city ---", new { @class = "form-control mt-2 mb-2"})*@
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-2 mb-2">Shipping Address</label>
+                        @Html.TextBoxFor(model => model.Account.Address1.StreetName, new { @class = "form-control", placeholder = "Street name" })
+                        @Html.ValidationMessageFor(model => model.Account.Address1.StreetName, "", new { @class = "text-danger m-2" })
+                        @Html.TextBoxFor(model => model.Account.Address1.StreetNumber, new { @class = "form-control", placeholder = "Street number" })
+                        @Html.ValidationMessageFor(model => model.Account.Address1.StreetNumber, "", new { @class = "text-danger m-2" })
+                        @Html.TextBoxFor(model => model.Account.Address1.ApartmentNumber, new { @class = "form-control", placeholder = "Apartment number" })
+                        @Html.ValidationMessageFor(model => model.Account.Address1.ApartmentNumber, "", new { @class = "text-danger m-2" })
+                        @*  @Html.DropDownList("saCity", new SelectList(Model.cityList, "CityID", "CityName"), "Select city ---", new { @class = "form-control mt-2 mb-2"})**@
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary mb-5" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

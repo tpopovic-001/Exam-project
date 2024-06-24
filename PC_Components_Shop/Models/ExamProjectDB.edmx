@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ExamProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ExamProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressID" />
@@ -13,6 +13,22 @@
           <Property Name="StreetName" Type="nvarchar" MaxLength="80" Nullable="false" />
           <Property Name="StreetNumber" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="ApartmentNumber" Type="varchar" MaxLength="5" />
+          <Property Name="Fk_City" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Fk_Country" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nvarchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="DeliveryService">
           <Key>
@@ -100,7 +116,7 @@
           <Property Name="ProductCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryName" Type="nvarchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Account__Fk_Acco__2A4B4B5E">
+        <Association Name="FK__Account__Fk_Acco__300424B4">
           <End Role="AccountType" Type="Self.AccountType" Multiplicity="1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +128,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account__Fk_Bill__286302EC">
+        <Association Name="FK__Account__Fk_Bill__2E1BDC42">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -124,7 +140,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Account__Fk_Ship__29572725">
+        <Association Name="FK__Account__Fk_Ship__2F10007B">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
@@ -136,7 +152,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DeliveryS__Fk_Ad__2F10007B">
+        <Association Name="FK__Address__Fk_City__29572725">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="Fk_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__City__Fk_Country__267ABA7A">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="Fk_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeliveryS__Fk_Ad__34C8D9D1">
           <End Role="Address" Type="Self.Address" Multiplicity="1" />
           <End Role="DeliveryService" Type="Self.DeliveryService" Multiplicity="*" />
           <ReferentialConstraint>
@@ -148,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderItem__Order__3E52440B">
+        <Association Name="FK__OrderItem__Order__440B1D61">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
@@ -160,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderItem__Produ__3F466844">
+        <Association Name="FK__OrderItem__Produ__44FF419A">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
@@ -172,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Fk_Accou__38996AB5">
+        <Association Name="FK__Orders__Fk_Accou__3E52440B">
           <End Role="Account" Type="Self.Account" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -184,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Fk_Deliv__398D8EEE">
+        <Association Name="FK__Orders__Fk_Deliv__3F466844">
           <End Role="DeliveryService" Type="Self.DeliveryService" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -196,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Fk_Order__3B75D760">
+        <Association Name="FK__Orders__Fk_Order__412EB0B6">
           <End Role="OrderState" Type="Self.OrderState" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -208,7 +248,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Orders__Fk_Payme__3A81B327">
+        <Association Name="FK__Orders__Fk_Payme__403A8C7D">
           <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
@@ -220,7 +260,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__Fk_Prod__31EC6D26">
+        <Association Name="FK__Product__Fk_Prod__37A5467C">
           <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -234,6 +274,8 @@
         </Association>
         <EntityContainer Name="ExamProjectDBModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" Schema="Logistics" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="Logistics" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="Logistics" store:Type="Tables" />
           <EntitySet Name="DeliveryService" EntityType="Self.DeliveryService" Schema="Logistics" store:Type="Tables" />
           <EntitySet Name="Account" EntityType="Self.Account" Schema="Personal" store:Type="Tables" />
           <EntitySet Name="AccountType" EntityType="Self.AccountType" Schema="Personal" store:Type="Tables" />
@@ -243,53 +285,60 @@
           <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="Sales" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="Sales" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="Sales" store:Type="Tables" />
-          <AssociationSet Name="FK__Account__Fk_Acco__2A4B4B5E" Association="Self.FK__Account__Fk_Acco__2A4B4B5E">
+          <AssociationSet Name="FK__Account__Fk_Acco__300424B4" Association="Self.FK__Account__Fk_Acco__300424B4">
             <End Role="AccountType" EntitySet="AccountType" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account__Fk_Bill__286302EC" Association="Self.FK__Account__Fk_Bill__286302EC">
+          <AssociationSet Name="FK__Account__Fk_Bill__2E1BDC42" Association="Self.FK__Account__Fk_Bill__2E1BDC42">
             <End Role="Address" EntitySet="Address" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__Account__Fk_Ship__29572725" Association="Self.FK__Account__Fk_Ship__29572725">
+          <AssociationSet Name="FK__Account__Fk_Ship__2F10007B" Association="Self.FK__Account__Fk_Ship__2F10007B">
             <End Role="Address" EntitySet="Address" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK__DeliveryS__Fk_Ad__2F10007B" Association="Self.FK__DeliveryS__Fk_Ad__2F10007B">
+          <AssociationSet Name="FK__Address__Fk_City__29572725" Association="Self.FK__Address__Fk_City__29572725">
+            <End Role="City" EntitySet="City" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK__City__Fk_Country__267ABA7A" Association="Self.FK__City__Fk_Country__267ABA7A">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeliveryS__Fk_Ad__34C8D9D1" Association="Self.FK__DeliveryS__Fk_Ad__34C8D9D1">
             <End Role="Address" EntitySet="Address" />
             <End Role="DeliveryService" EntitySet="DeliveryService" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderItem__Order__3E52440B" Association="Self.FK__OrderItem__Order__3E52440B">
+          <AssociationSet Name="FK__OrderItem__Order__440B1D61" Association="Self.FK__OrderItem__Order__440B1D61">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderItem__Produ__3F466844" Association="Self.FK__OrderItem__Produ__3F466844">
+          <AssociationSet Name="FK__OrderItem__Produ__44FF419A" Association="Self.FK__OrderItem__Produ__44FF419A">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Fk_Accou__38996AB5" Association="Self.FK__Orders__Fk_Accou__38996AB5">
+          <AssociationSet Name="FK__Orders__Fk_Accou__3E52440B" Association="Self.FK__Orders__Fk_Accou__3E52440B">
             <End Role="Account" EntitySet="Account" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Fk_Deliv__398D8EEE" Association="Self.FK__Orders__Fk_Deliv__398D8EEE">
+          <AssociationSet Name="FK__Orders__Fk_Deliv__3F466844" Association="Self.FK__Orders__Fk_Deliv__3F466844">
             <End Role="DeliveryService" EntitySet="DeliveryService" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Fk_Order__3B75D760" Association="Self.FK__Orders__Fk_Order__3B75D760">
+          <AssociationSet Name="FK__Orders__Fk_Order__412EB0B6" Association="Self.FK__Orders__Fk_Order__412EB0B6">
             <End Role="OrderState" EntitySet="OrderState" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Orders__Fk_Payme__3A81B327" Association="Self.FK__Orders__Fk_Payme__3A81B327">
+          <AssociationSet Name="FK__Orders__Fk_Payme__403A8C7D" Association="Self.FK__Orders__Fk_Payme__403A8C7D">
             <End Role="PaymentMethod" EntitySet="PaymentMethod" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__Fk_Prod__31EC6D26" Association="Self.FK__Product__Fk_Prod__31EC6D26">
+          <AssociationSet Name="FK__Product__Fk_Prod__37A5467C" Association="Self.FK__Product__Fk_Prod__37A5467C">
             <End Role="ProductCategory" EntitySet="ProductCategory" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ExamProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -304,6 +353,8 @@
           <NavigationProperty Name="Accounts" Relationship="Self.FK__Account__Fk_Bill__286302EC" FromRole="Address" ToRole="Account" />
           <NavigationProperty Name="Accounts1" Relationship="Self.FK__Account__Fk_Ship__29572725" FromRole="Address" ToRole="Account" />
           <NavigationProperty Name="DeliveryServices" Relationship="Self.FK__DeliveryS__Fk_Ad__2F10007B" FromRole="Address" ToRole="DeliveryService" />
+          <Property Name="Fk_City" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="ExamProjectDBModel.FK__Address__Fk_City__29572725" FromRole="Address" ToRole="City" />
         </EntityType>
         <EntityType Name="DeliveryService">
           <Key>
@@ -597,7 +648,59 @@
             <End Role="ProductCategory" EntitySet="ProductCategories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <EntitySet Name="Cities" EntityType="ExamProjectDBModel.City" />
+          <EntitySet Name="Countries" EntityType="ExamProjectDBModel.Country" />
+          <AssociationSet Name="FK__Address__Fk_City__29572725" Association="ExamProjectDBModel.FK__Address__Fk_City__29572725">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__City__Fk_Country__267ABA7A" Association="ExamProjectDBModel.FK__City__Fk_Country__267ABA7A">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="City" EntitySet="Cities" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Fk_Country" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="ExamProjectDBModel.FK__Address__Fk_City__29572725" FromRole="City" ToRole="Address" />
+          <NavigationProperty Name="Country" Relationship="ExamProjectDBModel.FK__City__Fk_Country__267ABA7A" FromRole="City" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cities" Relationship="ExamProjectDBModel.FK__City__Fk_Country__267ABA7A" FromRole="Country" ToRole="City" />
+        </EntityType>
+        <Association Name="FK__Address__Fk_City__29572725">
+          <End Type="ExamProjectDBModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="ExamProjectDBModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="Fk_City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__City__Fk_Country__267ABA7A">
+          <End Type="ExamProjectDBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="ExamProjectDBModel.City" Role="City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="Fk_Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -607,6 +710,7 @@
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="ExamProjectDBModel.Address">
               <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Fk_City" ColumnName="Fk_City" />
                 <ScalarProperty Name="AddressID" ColumnName="AddressID" />
                 <ScalarProperty Name="StreetName" ColumnName="StreetName" />
                 <ScalarProperty Name="StreetNumber" ColumnName="StreetNumber" />
@@ -705,6 +809,23 @@
               <MappingFragment StoreEntitySet="ProductCategory">
                 <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="ExamProjectDBModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="Fk_Country" ColumnName="Fk_Country" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ExamProjectDBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,6 +18,18 @@ namespace PC_Components_Shop
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "InsertOrder",
+               url: "{controller}/{action}",
+               defaults: new { controller = "Order", action = "ShowForm"}
+           );
+
+            routes.MapRoute(
+              name: "Register",
+              url: "{controller}/{action}",
+              defaults: new { controller = "Register", action = "Index" }
+          );
         }
     }
 }

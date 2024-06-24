@@ -11,7 +11,8 @@ namespace PC_Components_Shop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,25 @@ namespace PC_Components_Shop.Models
         }
     
         public int AccountID { get; set; }
+        [Required(ErrorMessage ="The Username field is required and cannot be empty!")]
+        [StringLength(30,ErrorMessage ="Username cannot be longer than 30 characters!")]
+        [RegularExpression(@"^[a-zA-Z]+[0-9]*$", ErrorMessage = "Username can contain only letters and, optionally, numbers at the end")]
         public string UserName { get; set; }
+        [Required(ErrorMessage = "Password field is required and cannot be empty!")]
+        [StringLength(60, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long!")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character")]
         public string Password { get; set; }
+        [Required(ErrorMessage ="Email Address field is required and cannot be empty!")]
+        [StringLength(255,ErrorMessage ="Email Address cannot be longer than 255 characters!")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Invalid Email Address")]
         public string EmailAddress { get; set; }
+        [Required(ErrorMessage ="First name field is required and cannot be empty!")]
+        [StringLength(20,ErrorMessage = "First name cannot be longer than 20 characters!")]
+        [RegularExpression(@"^[A-Z][a-z]+$",ErrorMessage = "First name is not in a correct format!")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Last name field is required and cannot be empty!")]
+        [StringLength(20, ErrorMessage = "Last name cannot be longer than 20 characters!")]
+        [RegularExpression(@"^[A-Z][a-z]+$", ErrorMessage = "Last name is not in a correct format!")]
         public string LastName { get; set; }
         public System.DateTime DOB { get; set; }
         public System.DateTime DateOfRegistration { get; set; }
