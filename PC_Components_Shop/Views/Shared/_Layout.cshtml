@@ -17,8 +17,15 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Register", "Index", "Register", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["AccountID"] == null)
+                    {
+                        <li>@Html.ActionLink("Register", "Index", "Register", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Log in", "Index", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (Session["AccountID"] != null)
+                    {
+                        <li>@Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
             </div>
         </div>

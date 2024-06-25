@@ -24,6 +24,18 @@ namespace PC_Components_Shop
               url: "{controller}/{action}",
               defaults: new { controller = "Register", action = "Index" }
           );
+
+            routes.MapRoute(
+             name: "Login",
+             url: "{controller}/{action}",
+             defaults: new { controller = "Login", action = "Index" }
+         );
+
+         routes.MapRoute(
+         name: "Logout",
+         url: "{controller}/{action}",
+         defaults: new { controller = "Login", action = "Logout" }
+     );
         }
     }
 }

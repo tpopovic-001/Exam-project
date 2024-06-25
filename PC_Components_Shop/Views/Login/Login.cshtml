@@ -1,0 +1,39 @@
+﻿@using PC_Components_Shop.Models;
+@model LoginViewData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-white mt-3 mb-3">Log into your account</h5>
+            </div>
+            <div class="col-6 m-5">
+
+                @using (Html.BeginForm("CredentialCheck", "Login", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control mt-3 mb-3", placeholder = "Enter your username" })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control mt-3 mb-3", placeholder = "Enter your password", type = "password" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        <input type="submit" value="Login" class="btn btn-primary mt-5 mb-5" />
+                    </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
