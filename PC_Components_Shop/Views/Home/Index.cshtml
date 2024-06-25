@@ -9,7 +9,7 @@
 }
 
 <main>
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-end mt-5">
         <div class="col-3">
             @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
@@ -40,7 +40,7 @@
         @foreach (var prod in Model)
         {
             <div class="col-lg-3">
-                <div class="card" style="margin: 2rem 1rem 2rem 1rem">
+                <div class="card border border-light border-2" style="margin: 2rem 1rem 2rem 1rem; background-color: #F3FF90 ">
                     <img class="card-img-top" src="" alt="" width="200" height="200" />
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelProduct => prod.ProductName)</h5>
@@ -51,7 +51,7 @@
                             <span class="text-black">Price: @Html.DisplayFor(modelProduct => prod.StandardPrice)</span>
                         </p>
                         <p>
-                            <a class="btn btn-success" href="">Details</a>
+                            <a class="btn btn-primary" href="">Details</a>
                         </p>
                     </div>
                 </div>

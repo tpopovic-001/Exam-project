@@ -156,7 +156,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,7 +178,6 @@
     <Compile Include="Models\DeliveryService.cs">
       <DependentUpon>ExamProjectDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OrderViewData.cs" />
     <Compile Include="Models\ExamProjectDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -307,7 +305,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Order\CreateOrderPage.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>

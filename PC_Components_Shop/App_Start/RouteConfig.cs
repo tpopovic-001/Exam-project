@@ -20,12 +20,6 @@ namespace PC_Components_Shop
             );
 
             routes.MapRoute(
-               name: "InsertOrder",
-               url: "{controller}/{action}",
-               defaults: new { controller = "Order", action = "ShowForm"}
-           );
-
-            routes.MapRoute(
               name: "Register",
               url: "{controller}/{action}",
               defaults: new { controller = "Register", action = "Index" }

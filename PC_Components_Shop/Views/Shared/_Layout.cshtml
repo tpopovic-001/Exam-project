@@ -7,10 +7,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+<body class="bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom border-light">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("PC Components Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -18,8 +18,6 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Create Order", "ShowForm", "Order", new { area = "" }, new { @class = "nav-link" })</li>
-                  
                     <li>@Html.ActionLink("Register", "Index", "Register", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
             </div>
@@ -28,8 +26,8 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer class="row justify-content-center">
-            <p>&copy; @DateTime.Now.Year - PC Components Shop</p>
+        <footer class="row">
+            <p class="text-white">&copy; @DateTime.Now.Year - PC Components Shop</p>
         </footer>
     </div>
 
