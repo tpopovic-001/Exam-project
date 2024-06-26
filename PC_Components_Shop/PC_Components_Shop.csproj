@@ -157,6 +157,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +214,7 @@
     <Compile Include="Models\ProductCategory.cs">
       <DependentUpon>ExamProjectDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductViewData.cs" />
     <Compile Include="Models\RegisterViewData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -309,6 +311,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Register\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Product\ProductUpdate.cshtml" />
+    <Content Include="Views\Product\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

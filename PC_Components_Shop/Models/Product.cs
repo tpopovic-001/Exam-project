@@ -11,7 +11,8 @@ namespace PC_Components_Shop.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,22 @@ namespace PC_Components_Shop.Models
         }
     
         public int ProductID { get; set; }
+        [Required(ErrorMessage = "Product field is required and it needs to be populated!")]
+        [StringLength(50,ErrorMessage ="Product name cannot contain more than 50 characters!")]
+        [RegularExpression(@"^[A-Za-z]+[\w\s-]*$", ErrorMessage = "Product name must start with a capital letter and can contain numbers at the end")]
         public string ProductName { get; set; }
+        [StringLength(500,ErrorMessage = "Product description cannot contain more than 500 characters!")]
         public string ProductDescription { get; set; }
+        [Required(ErrorMessage ="Standard price field is required and must be populated!")]
+        [Range(20,999999,ErrorMessage ="Standard price can be only in range from 20 - 999,999")]
         public decimal StandardPrice { get; set; }
+        [Required(ErrorMessage ="Quantity in stock field is required and must be populated!")]
+        [Range(0,300,ErrorMessage ="Quantity in stock can be only in range from 0 - 300!")]
         public int QtyInStock { get; set; }
+        [Required(ErrorMessage ="Product category field is required and must be populated!")]
+        [Range(1,14,ErrorMessage ="Product category is not selected!")]
         public int Fk_ProductCategoryID { get; set; }
+        [StringLength(5000,ErrorMessage = "Image paths space is limited to 5000 characters!")]
         public string ImagePaths { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

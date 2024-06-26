@@ -1,0 +1,65 @@
+﻿@using PC_Components_Shop.Models;
+@model ProductViewData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Product Details</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+ </head>
+<body class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-white mt-3 mb-3"> 
+                    Product details
+                </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <h5 class="text-white mt-3 mb-3">
+                    @Model.Product.ProductName
+                </h5>
+                <p>
+                    <span class="text-white m-2">Product description:</span>
+                    <span class="text-white mt-3 mb-3">
+                        @Model.Product.ProductDescription
+                    </span>
+                </p>
+                <p>
+                    <span class="text-white m-2">Standard price:</span>
+                    <span class="text-white mt-3 mb-3">
+                        @Model.Product.StandardPrice€
+                    </span>
+                </p>
+                <p>
+                    <span class="text-white m-2">Quantity in stock:</span>
+                    <span class="text-white mt-3 mb-3">
+                        @Model.Product.QtyInStock
+                    </span>
+                </p>
+                <p>
+                    <span class="text-white mt-3 mb-3">
+                        <img  src=" @Model.Product.ImagePaths" alt="no picture" width="250" height="250"/>
+                    </span>
+                </p>
+                <p>
+                    @if (Session["AccountID"] != null && Convert.ToInt32(Session["AccountType"]) == 1)
+                    {
+                        <a class="btn btn-success mt-5 mb-5" href="@Url.Action("UpdateProductPage", "Product", new { id = Model.Product.ProductID })">Update product details</a> <a class="btn btn-danger mt-5 mb-5" href="@Url.Action("DeleteExistingProduct", "Product", new { id = Model.Product.ProductID })">Delete product</a>
+                    }
+                    <a class="btn btn-primary mt-5 mb-5" href="@Url.Action("Index", "Home")">Go back to home page</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

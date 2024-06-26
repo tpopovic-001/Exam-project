@@ -41,17 +41,17 @@
         {
             <div class="col-lg-3">
                 <div class="card border border-light border-2" style="margin: 2rem 1rem 2rem 1rem; background-color: #F3FF90 ">
-                    <img class="card-img-top" src="" alt="" width="200" height="200" />
+                    <img class="card-img-top" src="@prod.ImagePaths" alt="There's no product picture at the moment!'" width="200" height="200" />
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelProduct => prod.ProductName)</h5>
                         <p class="card-text">
                             @Html.DisplayFor(modelProduct => prod.ProductDescription)
                         </p>
                         <p>
-                            <span class="text-black">Price: @Html.DisplayFor(modelProduct => prod.StandardPrice)</span>
+                            <span class="text-black">Price: @Html.DisplayFor(modelProduct => prod.StandardPrice)€</span>
                         </p>
                         <p>
-                            <a class="btn btn-primary" href="">Details</a>
+                            <a class="btn btn-primary" href="@Url.Action("DetailsProductPage","Product", new {id = prod.ProductID })">Details</a>
                         </p>
                     </div>
                 </div>

@@ -1,0 +1,66 @@
+﻿@using PC_Components_Shop.Models;
+@model ProductViewData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Product</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="text-white mt-3 mb-3">Create new product</h5>
+            </div>
+        <div class="row">
+            <div class="col-6">
+                @using (Html.BeginForm("SendNewProductDataToDB", "Product", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Product.ProductName, new { @class = "form-control mt-3 mb-3", placeholder = "Product name" })
+                        @Html.ValidationMessageFor(model => model.Product.ProductName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="text-white mt-2 mb-2">Product description</label>
+                        @Html.TextAreaFor(model => model.Product.ProductDescription, new { @class = "form-control mt-3 mb-3", rows = 11, cols = 11 })
+                        @Html.ValidationMessageFor(model => model.Product.ProductDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="text-white mt-2 mb-2">Standard price</label>
+                        @Html.TextBoxFor(model => model.Product.StandardPrice, new { @class = "form-control mt-3 mb-3", type = "number", })
+                        @Html.ValidationMessageFor(model => model.Product.StandardPrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="text-white mt-2 mb-2">Quantity in stock</label>
+                        @Html.TextBoxFor(model => model.Product.QtyInStock, new { @class = "form-control mt-3 mb-3", type = "number" })
+                        @Html.ValidationMessageFor(model => model.Product.QtyInStock, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.Product.Fk_ProductCategoryID, new SelectList(Model.ProductCategories, "ProductCategoryID", "CategoryName", Model.Product.Fk_ProductCategoryID), "Select product category ---", new { @class = "form-control mt-2 mb-2" })
+                        @Html.ValidationMessageFor(model => model.Product.Fk_ProductCategoryID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="text-white mt-2 mb-2">Image paths (Separate them with a comma if more than 1)</label>
+                        @Html.TextAreaFor(model => model.Product.ImagePaths, new { @class = "form-control mt-3 mb-3", rows = 11, cols = 11 })
+                        @Html.ValidationMessageFor(model => model.Product.ImagePaths, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create product" class="btn btn-primary mt-5 mb-5" />
+                    </div>
+                }
+            </div>
+        </div>
+        </div>
+    </div>
+   
+</body>
+</html>

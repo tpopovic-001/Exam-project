@@ -22,8 +22,13 @@
                         <li>@Html.ActionLink("Register", "Index", "Register", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Log in", "Index", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                     }
-                    @if (Session["AccountID"] != null)
+                    @if (Session["AccountID"] != null && Convert.ToInt32(Session["AccountType"]) == 2)
                     {
+                        <li>@Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
+                    @if (Session["AccountID"] != null && Convert.ToInt32(Session["AccountType"]) == 1)
+                    {
+                        <li>@Html.ActionLink("Create product", "CreateProductPage", "Product", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Log out", "Logout", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                     }
                 </ul>

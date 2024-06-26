@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 
 namespace PC_Components_Shop
 {
@@ -35,7 +36,32 @@ namespace PC_Components_Shop
          name: "Logout",
          url: "{controller}/{action}",
          defaults: new { controller = "Login", action = "Logout" }
+        );
+
+        routes.MapRoute(
+        name: "CreateProduct",
+        url: "{controller}/{action}",
+        defaults: new { controller = "Product", action = "CreateProductPage" }
+        );
+
+       routes.MapRoute(
+       name: "UpdateProduct",
+       url: "{controller}/{action}",
+       defaults: new { controller = "Product", action = "UpdateProductPage" }
+       );
+
+      routes.MapRoute(
+      name: "DetailProduct",
+      url: "{controller}/{action}",
+      defaults: new { controller = "Product", action = "DetailsProductPage" }
+      );
+
+     routes.MapRoute(
+     name: "SendUpdatedProduct",
+     url: "{controller}/{action}/{id}",
+     defaults: new { controller = "Product", action = "SendUpdatedProductDataToDB", id = UrlParameter.Optional }
      );
+
         }
     }
 }

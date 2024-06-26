@@ -12,6 +12,14 @@
     <title>Login</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+     $(document).ready(function() {
+         $("form").validate();
+     });
+    </script>
 </head>
 <body class="bg-dark">
     <div class="container">
